@@ -51,6 +51,12 @@ def login():
                             providers=app.config['OPENID_PROVIDERS'])
 
 
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
 @oid.after_login
 def after_login(resp):
     if resp.email is None or resp.email == "":
