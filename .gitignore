@@ -1,12 +1,14 @@
 # Ignore flask (virtual env)
 flask/
 
-# Ignore db and db repo
-db_repository/
+# Ignore db and db repo (but keep directory)
+db_repository/*
+!db_repository/.gitkeep
 app.db
 
-# Ignore tmp files
-tmp/
+# Ignore tmp files (but keep directory)
+tmp/*
+!tmp/.gitkeep
 
 # Standard python exclusions
 # Byte-compiled / optimized / DLL files
