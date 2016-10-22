@@ -1,10 +1,11 @@
 # Ignore flask (virtual env)
 flask/
 
-# Ignore db and db repo (but keep directory)
+# Ignore app and test db and db repo (but keep directory)
 db_repository/*
 !db_repository/.gitkeep
 app.db
+test.db
 
 # Ignore tmp files (but keep directory)
 tmp/*
