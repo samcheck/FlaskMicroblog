@@ -1,6 +1,13 @@
 from app import db
 from hashlib import md5
 
+# association table for followers
+followers = db.Table('followers',
+                db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
+                db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+            )
+
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nickname = db.Column(db.String(64), index=True, unique=True)
@@ -62,10 +69,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post %r>' % (self.body)
-
-
-# association table for followers
-followers = db.Table('followers',
-                db.Column('follower_id', db.Integer, db.ForeignKey('user.id'))
-                db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
-            )
