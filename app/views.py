@@ -1,39 +1,25 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
 from app import app, db, lm, oid
-from .forms import LoginForm, EditForm
-from .models import User
+from forms import LoginForm, EditForm, PostForm
+from models import User, Post
 from datetime import datetime
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
-    user = g.user
-    posts = [ # Fake posts array
-            {
-                'author': {'nickname': 'John'},
-                'body': 'Beautiful day in Chi Town!'
-            },
-            {
-                'author': {'nickname': 'Susan'},
-                'body': 'The new Star Wars movie was cool!'
-            },
-            {
-                'author': {'nickname': 'Larry'},
-                'body': '''Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-                 aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                 ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-                 aute irure dolor in reprehenderit in voluptate velit esse
-                 cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.'''
-            }
-            ]
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, timestamp=datetime.utcnow(), author=g.user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Post is now live!')
+        return redirect(url_for('index'))
+    posts = g.user.followed_posts().all()
     return render_template('index.html',
                             title='Home',
-                            user=user,
+                            form=form,
                             posts=posts)
 
 
