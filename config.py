@@ -26,3 +26,7 @@ MAIL_PASSWORD = None
 ADMINS = ['you@example.com']
 # command to run the above debugging email server locally
 # python3 -m smtpd -n -c DebuggingServer localhost:25
+
+
+#pagination
+POSTS_PER_PAGE = 3
