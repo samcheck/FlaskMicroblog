@@ -6,6 +6,8 @@ db_repository/*
 !db_repository/.gitkeep
 app.db
 test.db
+search.db/*
+!search.db/.gitkeep
 
 # Ignore tmp files (but keep directory)
 tmp/*
