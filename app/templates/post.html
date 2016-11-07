@@ -1,6 +1,9 @@
-<table>
-    <tr valign="top">
-        <td><img src="{{ post.author.avatar(50) }}"></td>
-        <td><i>{{ post.author.nickname }} says:</i><br>{{ post.body }}</td>
-    </tr>
-</table>
+<div class="media">
+    <a class="pull-left" href="{{ url_for('user', nickname=post.author.nickname)}}">
+        <img class="media-object" src="{{ post.author.avatar(50) }}">
+    </a>
+    <div class="media-body">
+        <h4 class="media-heading">{{ post.author.nickname }} said {{ momentjs(post.timestamp).fromNow() }}:</h4>
+        <p>{{ post.body }}</p>
+    </div>
+</div>

@@ -3,33 +3,26 @@
 
 {% block content %}
     <h1>Guten Tag, {{ g.user.nickname }}!</h1>
-    <form action="" method="post" name="post">
+    <div class="well">
+        <form action="" method="post" name="post">
         {{ form.hidden_tag() }}
-        <table>
-            <tr>
-                <td>Declare something:</td>
-                <td>{{ form.post(size=30, maxlength=140) }}</td>
-                <td>
-                    {% for error in form.post.errors %}
-                    <span style="color: red;">[{{ error }}]</span><br>
-                    {% endfor %}
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                <td><input type="submit" value="Post!"></td>
-                <td></td>
-            </tr>
-        </table>
-    </form>
+        {{ form.post(placeholder='Post something...', size=30, maxlength=140) }}
+        <button type="submit" class="btn btn-primary">Post</button>
+        {% for error in form.post.errors %}
+            <div class="alert alert-warning" role="alert">{{ error }}</div>
+        {% endfor %}
+        </form>
+    </div>
     <!-- posts in a Paginate object -->
     {% for post in posts.items %}
         {% include 'post.html' %}
     {% endfor %}
-    {% if posts.has_prev %}
-        <a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Newer posts</a>
-    {% else %}&lt;&lt; Newer Posts{% endif %} |
-    {% if posts.has_next %}
-        <a href="{{ url_for('index', page=posts.next_num) }}">Older posts &gt;&gt;</a>
-    {% else %}Older Posts &gt;&gt;{% endif %}
+        <ul class="pager">
+            {% if posts.has_prev %}
+                <li><a href="{{ url_for('index', page=posts.prev_num) }}">&lt;&lt; Newer posts</a></li>
+            {% else %}<li class="disabled"><a href="#">&lt;&lt; Newer posts</a></li>{% endif %}
+            {% if posts.has_next %}
+                <li><a href="{{ url_for('index', page=posts.next_num) }}">Older posts &gt;&gt;</a></li>
+            {% else %}<li class="disabled"><a href="#">Older posts &gt;&gt;</a></li>{% endif %}
+        </ul>
 {% endblock %}
