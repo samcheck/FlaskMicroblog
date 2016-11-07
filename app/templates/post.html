@@ -5,5 +5,8 @@
     <div class="media-body">
         <h4 class="media-heading">{{ post.author.nickname }} said {{ momentjs(post.timestamp).fromNow() }}:</h4>
         <p>{{ post.body }}</p>
+        {% if post.author.id == g.user.id %}
+        <a href="{{ url_for('delete', id=post.id) }}" class="btn btn-xs btn-danger">Delete Post</a>
+        {% endif %}
     </div>
 </div>
