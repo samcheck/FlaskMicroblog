@@ -1,11 +1,22 @@
 from flask import render_template, flash, redirect, session, url_for, request, g
 from flask_login import login_user, logout_user, current_user, login_required
+from flask_sqlalchemy import get_debug_queries
 from app import app, db, lm, oid
 from .forms import LoginForm, EditForm, PostForm
 from .models import User, Post
 from .emails import follower_notification
 from datetime import datetime
-from config import POSTS_PER_PAGE
+from config import POSTS_PER_PAGE, DATABASE_QUERY_TIMEOUT
+
+
+@app.after_request
+def after_request(response):
+    for query in get_debug_queries():
+        if query.duration >= DATABASE_QUERY_TIMEOUT:
+            app.logger.warning("SLOW QUERY: %s\nParameters: %s\nDuration: %fs\nContext: %s\n"
+                                % (query.statement, query.parameters, query.duration, query.context))
+    return response
+
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
