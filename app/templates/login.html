@@ -19,8 +19,9 @@ function set_openid(openid, pr)
     <form action="" method="post" name="login">
         {{ form.hidden_tag() }}
         <p>
-            Please enter your OpenID:<br>
-            {{ form.openid(size=80) }}<br>
+            <br>
+            {{ form.openid(size=80, placeholder="Enter your OpenID") }}
+            <br>
             {% for error in form.openid.errors %}
                 <div class="alert alert-warning" role="alert">{{ error }}</div>
             {% endfor %}<br>
@@ -29,6 +30,6 @@ function set_openid(openid, pr)
             {% endfor %}
         </p>
         <p>{{ form.remember_me }} Remember Me</p>
-        <p><input type="submit" class="btn btn-primary">"Sign In"</p>
+        <p><input type="submit" class="btn btn-primary" value="Sign In"></p>
     </form>
 {% endblock %}
