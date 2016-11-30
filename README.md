@@ -12,7 +12,7 @@ Working through Miguel Grinberg's great tutorials, trying to update to python3 a
 - [x] <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-ix-pagination">Part IX: Pagination</a>
 - [ ] <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-x-full-text-search">Part X: Full Text Search</a>
     - Not complete still not compatible with python3, implemented up to "Integrating full text searches into the application"
-- [ ] <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xi-email-support">Part XI: Email Support</a>
+- [x] <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xi-email-support">Part XI: Email Support</a>
 - [x] <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xii-facelift">Part XII: Facelift</a>
     - Essentially finished
 - [x] <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiii-dates-and-times">Part XIII: Dates and Times</a>
